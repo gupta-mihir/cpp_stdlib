@@ -1,0 +1,6 @@
+class vector {
+	public:
+		vector();
+};
+
+
