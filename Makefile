@@ -12,7 +12,7 @@ vec_prog.exe : $(OBJ_FILES)
 	$(LINK) $(LINKFLAGS) $** /OUT:vec_prog.exe
 	vec_prog
 
-$(OBJ_FILES): $*.cpp
+.cpp.obj:
 	$(CC) $(CPPFLAGS) /c $*.cpp
 
 vector.obj: $*.h
