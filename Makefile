@@ -1,11 +1,13 @@
 CC = cl
 CPPFLAGS = /nologo /EHsc
+LINK = link
+LINKFLAGS = /nologo
 
 all: vec_prog.exe
 
 
 vec_prog.exe : main.obj vector.obj binary_search_tree.obj
-	cl /nologo /EHsc main.obj vector.obj binary_search_tree.obj /Fe"vec_prog.exe"
+	$(LINK) $(LINKFLAGS) main.obj vector.obj binary_search_tree.obj /OUT:vec_prog.exe
 	vec_prog
 
 main.obj : main.cpp 
