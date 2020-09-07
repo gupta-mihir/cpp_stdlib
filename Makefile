@@ -1,24 +1,26 @@
+INCLUDE_DIR = include
+
 CC = cl
-CPPFLAGS = /nologo /EHsc
+CPPFLAGS = -nologo -EHsc -I$(INCLUDE_DIR)
 LINK = link
-LINKFLAGS = /nologo
+LINKFLAGS = -nologo
 
-OBJ_FILES = main.obj vector.obj binary_search_tree.obj
+OBJ_FILES = objs\main.obj objs\vector.obj objs\binary_search_tree.obj
 
-all: vec_prog.exe
+all: bin\vec_prog.exe
+
+bin\vec_prog.exe : $(OBJ_FILES)
+	$(LINK) $(LINKFLAGS) $(**) -OUT:bin\vec_prog.exe
+	bin\vec_prog
+
+{src}.cpp{objs}.obj:
+	$(CC) $(CPPFLAGS) -c $< -Fo:$(@)
 
 
-vec_prog.exe : $(OBJ_FILES)
-	$(LINK) $(LINKFLAGS) $** /OUT:vec_prog.exe
-	vec_prog
-
-.cpp.obj:
-	$(CC) $(CPPFLAGS) /c $*.cpp
-
-vector.obj: $*.h
-binary_search_tree.obj: $*.h
-main.obj: vector.h binary_search_tree.h
+objs\vector.obj: include\vector.h
+objs\binary_search_tree.obj: include\binary_search_tree.h
+objs\main.obj: include\vector.h include\binary_search_tree.h
 
 clean :
-	del vec_prog.exe
-	del *.obj
+	del bin\vec_prog.exe
+	del objs\*.obj
